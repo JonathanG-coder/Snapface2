@@ -5,6 +5,8 @@ import { PostsService } from '../services/post.service';
 import { Observable } from 'rxjs';
 
 @Injectable()
+
+
 export class PostsResolver implements Resolve<Post[]> {
     constructor(private postsService: PostsService) { }
 
