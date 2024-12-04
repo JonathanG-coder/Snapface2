@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../../models/post.model';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
   selector: 'app-post-list-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatCardModule],
   templateUrl: './post-list-item.component.html',
   styleUrl: './post-list-item.component.scss'
 })

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SocialMediaRoutingModule } from './social-media-routing.module';
 import { PostsService } from './services/post.service';
 import { PostsResolver } from './resolvers/posts.resolver';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,7 +14,7 @@ import { PostsResolver } from './resolvers/posts.resolver';
   imports: [
     CommonModule,
     SocialMediaRoutingModule,
-
+    SharedModule
   ],
   providers: [
     PostsService,

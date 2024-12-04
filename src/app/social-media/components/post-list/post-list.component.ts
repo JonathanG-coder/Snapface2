@@ -4,12 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Post } from '../../models/post.model';
 import { PostListItemComponent } from "../post-list-item/post-list-item.component";
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
-  imports: [PostListItemComponent, CommonModule],  
+  imports: [PostListItemComponent, CommonModule, MatCardModule ],  
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss']
 })
