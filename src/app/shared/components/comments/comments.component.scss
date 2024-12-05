@@ -4,10 +4,21 @@ mat-list-item {
 }
 
 mat-list-item span {
-    color: black; 
+    color: black;
 }
-
 
 h2[matSubheader] {
     color: gray;
+}
+
+.comments-row {
+    display: flex;
+    border-top: thin solid #555;
+    padding-top: 10px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+mat-form-field {
+    width: 90%;
 }
