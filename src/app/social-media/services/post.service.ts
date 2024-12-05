@@ -10,4 +10,11 @@ export class PostsService {
     getPosts(): Observable<Post[]> {
         return this.http.get<Post[]>('http://localhost:3000/posts');
     }
+
+
+    addNewComment(postCommented: { comment: string, postId: number }) {
+        console.log(postCommented);
+    }
+
+    
 }

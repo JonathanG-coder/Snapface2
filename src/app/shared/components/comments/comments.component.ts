@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Comment } from '../../../core/models/comment.model';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-comments',
@@ -28,6 +30,7 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 export class CommentsComponent implements OnInit {
 
   @Input() comments!: Comment[];
+  @Output() newComment = new EventEmitter<string>();
 
   commentCtrl!: FormControl;
 
@@ -38,5 +41,10 @@ export class CommentsComponent implements OnInit {
   }
 
   onLeaveComment() {
-  }
+    if (this.commentCtrl.invalid) {
+        return;
+    }
+    this.newComment.emit(this.commentCtrl.value);
+    this.commentCtrl.reset();
+}
 }
