@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'username'
+    name: 'username',
+    standalone: false
 })
 export class UsernamePipe implements PipeTransform {
     transform(value: { firstName: string, lastName: string }, locale: 'en' | 'fr' = 'fr'): string {

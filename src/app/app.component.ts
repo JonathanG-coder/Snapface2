@@ -4,11 +4,10 @@ import { CoreModule } from "./core/core.module";
 import { HeaderComponent } from './core/components/header/header.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, CoreModule, HeaderComponent,],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet, CoreModule, HeaderComponent,],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 
 

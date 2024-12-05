@@ -24,10 +24,10 @@ import { SharedModule } from "../../shared.module";
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
 ],
   templateUrl: './comments.component.html',
-  styleUrls: ['./comments.component.scss'] // Attention : utilisez `styleUrls` au pluriel.
+  styleUrls: ['./comments.component.scss'] 
 })
 export class CommentsComponent implements OnInit {
 
