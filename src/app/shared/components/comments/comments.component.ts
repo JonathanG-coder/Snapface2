@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Comment } from '../../../core/models/comment.model';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
+import { SharedModule } from "../../shared.module";
 
 
 @Component({
@@ -22,8 +23,9 @@ import { EventEmitter } from '@angular/core';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    SharedModule
+],
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss'] // Attention : utilisez `styleUrls` au pluriel.
 })
