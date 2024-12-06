@@ -4,6 +4,7 @@ import { MaterialModule } from './material.module';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { UsernamePipe } from './pipes/username.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
   imports: [
     CommonModule,
     MaterialModule,
+    HighlightDirective
+
 
   ],
   exports: [
@@ -23,6 +26,8 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     ShortenPipe,
     UsernamePipe,
     TimeAgoPipe,
+    HighlightDirective
+
   ]
 })
 export class SharedModule { }
