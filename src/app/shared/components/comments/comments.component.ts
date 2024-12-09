@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SharedModule } from "../../shared.module";
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, group, query, sequence, state, style, transition, trigger } from '@angular/animations';
 import { Comment } from '../../../core/models/comment.model';
 
 @Component({
@@ -45,18 +45,44 @@ import { Comment } from '../../../core/models/comment.model';
       transition('active => default', [
         animate('500ms ease-in-out')
       ]),
-      transition('void => *', [
+      transition('deleting => *', [
+        animate('200ms')
+      ]),
+      transition('* => deleting', [
+        animate('2000ms ease-in-out')
+      ]),
+      transition(':enter', [
+        query('.comment-text, .comment-date', style({ opacity: 0 })),
         style({
-            transform: 'translateX(-100%)',
-            opacity: 0,
-            'background-color': 'rgb(201, 157, 242)',
+          transform: 'translateX(-100%)',
+          opacity: 0,
+          'background-color': 'rgb(201, 157, 242)'
         }),
         animate('250ms ease-out', style({
-            transform: 'translateX(0)',
-            opacity: 1,
-            'background-color': 'white',
-        }))
-    ])
+          transform: 'translateX(0)',
+          opacity: 1,
+          'background-color': 'white'
+        })),group([
+          /* sequence([
+              animate('250ms', style({
+                  'background-color': 'rgb(255,7,147)'
+              })),
+              animate('250ms', style({
+                  'background-color': 'white'
+              })),
+          ]), */
+          query('.comment-text', [
+              animate('250ms', style({
+                  opacity: 1
+              }))
+          ]),
+          query('.comment-date', [
+              animate('500ms', style({
+                  opacity: 1
+              }))
+          ]),
+      ]),
+      ])
     ])
   ]
 })
@@ -66,34 +92,35 @@ export class CommentsComponent implements OnInit {
 
   commentCtrl!: FormControl;
   animationStates: { [key: number]: 'default' | 'active' } = {};
-  listItemAnimationState: 'default' | 'active' = 'default';
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.commentCtrl = this.formBuilder.control('', [
       Validators.required,
       Validators.minLength(10)
     ]);
-    for (let index in this.comments) {
+    this.comments.forEach((_, index) => {
       this.animationStates[index] = 'default';
-  }
+    });
   }
 
-  onLeaveComment() {
+  onLeaveComment(): void {
     if (this.commentCtrl.invalid) {
-        return;
+      return;
     }
-    const maxId = Math.max(...this.comments.map(comment => comment.id));
+    const maxId = this.comments.length
+      ? Math.max(...this.comments.map(comment => comment.id))
+      : 0;
     this.comments.unshift({
-        id: maxId + 1,
-        comment: this.commentCtrl.value,
-        createdDate: new Date().toISOString(),
-        userId: 1
+      id: maxId + 1,
+      comment: this.commentCtrl.value,
+      createdDate: new Date().toISOString(),
+      userId: 1
     });
     this.newComment.emit(this.commentCtrl.value);
     this.commentCtrl.reset();
-}
+  }
 
   onListItemMouseEnter(index: number): void {
     this.animationStates[index] = 'active';
