@@ -8,8 +8,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SharedModule } from "../../shared.module";
-import { animate, group, query, sequence, state, style, transition, trigger } from '@angular/animations';
+import { animate, animateChild, group, query, sequence, stagger, state, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Comment } from '../../../core/models/comment.model';
+import { flashAnimation } from '../../animations/flash.animation';
+import { slideAndFadeAnimation } from '../../animations/slide-and-fade.animation';
+import { time } from 'console';
 
 @Component({
   selector: 'app-comments',
@@ -28,6 +31,15 @@ import { Comment } from '../../../core/models/comment.model';
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss'],
   animations: [
+    trigger('list', [
+      transition(':enter', [      // (':enter', [] = transition('default => active', [] 
+        query('@listItem', [    // query permet de recuperer les enfants.
+          stagger(50, [       // Stagger permet de decaler le demarage de chaque elements d'une liste.
+            animateChild()  // animateChild() permet de dire si un element à une animation execute la, sinon non.
+          ])
+        ])
+      ])
+    ]),
     trigger('listItem', [
       state('default', style({
         transform: 'scale(1)',
@@ -53,35 +65,31 @@ import { Comment } from '../../../core/models/comment.model';
       ]),
       transition(':enter', [
         query('.comment-text, .comment-date', style({ opacity: 0 })),
-        style({
-          transform: 'translateX(-100%)',
-          opacity: 0,
-          'background-color': 'rgb(201, 157, 242)'
+        useAnimation(slideAndFadeAnimation, {
+          params: {
+            time: '1000ms',
+            startColor: 'rgb(201,157,242)'
+
+          }
         }),
-        animate('250ms ease-out', style({
-          transform: 'translateX(0)',
-          opacity: 1,
-          'background-color': 'white'
-        })),group([
-          /* sequence([
-              animate('250ms', style({
-                  'background-color': 'rgb(255,7,147)'
-              })),
-              animate('250ms', style({
-                  'background-color': 'white'
-              })),
-          ]), */
+        group([
+          useAnimation(flashAnimation, {
+            params: {
+              time: '1000ms',
+              flashColor: 'rgb(249,179,111)'
+            }
+          }),    // permet l'appel à l'animation qui est réutilisable.
           query('.comment-text', [
-              animate('250ms', style({
-                  opacity: 1
-              }))
+            animate('250ms', style({
+              opacity: 1
+            }))
           ]),
           query('.comment-date', [
-              animate('500ms', style({
-                  opacity: 1
-              }))
+            animate('500ms', style({
+              opacity: 1
+            }))
           ]),
-      ]),
+        ]),
       ])
     ])
   ]
@@ -93,7 +101,7 @@ export class CommentsComponent implements OnInit {
   commentCtrl!: FormControl;
   animationStates: { [key: number]: 'default' | 'active' } = {};
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.commentCtrl = this.formBuilder.control('', [
