@@ -65,7 +65,7 @@ import { time } from 'console';
       ]),
       transition(':enter', [
         query('.comment-text, .comment-date', style({ opacity: 0 })),
-        useAnimation(slideAndFadeAnimation, {
+        useAnimation(slideAndFadeAnimation, {     // permet l'appel d'une animation réutilisable et parametrable grâce à useanimation.
           params: {
             time: '1000ms',
             startColor: 'rgb(201,157,242)'
