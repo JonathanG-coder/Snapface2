@@ -26,7 +26,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     ShortenPipe,
     UsernamePipe,
     TimeAgoPipe,
-    HighlightDirective
+    HighlightDirective,
 
   ]
 })

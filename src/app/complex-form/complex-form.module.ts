@@ -7,14 +7,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material.module';
 
 
+
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     ComplexFormRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class ComplexFormModule { }
