@@ -1,3 +1,9 @@
+mat-card-title,
+mat-card-subtitle,
+mat-card {
+    color: black;
+}
+
 mat-form-field {
     width: 45%;
 
@@ -15,6 +21,7 @@ mat-form-field {
 
 .form-card {
     margin: 20px 0;
+    color: black;
 }
 
 .mat-radio-button~.mat-radio-button {
@@ -46,4 +53,9 @@ mat-card-actions {
 
 .error-text {
     color: red;
+}
+
+mat-card {
+    background-color: white;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 }
