@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -32,18 +32,34 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrls: ['./complex-form.component.scss']
 })
 export class ComplexFormComponent implements OnInit {
-  
-  mainForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  mainForm!: FormGroup;
+  personalInfoForm!: FormGroup;
+  contactPreferenceCtrl!: FormControl;
+  phoneCtrl!: FormControl;
+
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.initFormControls();
     this.initMainForm();
   }
 
-  initMainForm(): void {
+
+  private initMainForm(): void {
     this.mainForm = this.formBuilder.group({});
   }
 
-  onSubmitForm() {}
+  private initFormControls(): void {
+    this.personalInfoForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+    });
+    this.contactPreferenceCtrl = this.formBuilder.control('email');
+    this.phoneCtrl = this.formBuilder.control('');
+  }
+
+
+  onSubmitForm() { }
 }
