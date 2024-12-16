@@ -11,6 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { map, Observable, startWith, tap } from 'rxjs';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { ComplexFormService } from '../../services/complex-form.service';
 
 @Component({
   selector: 'app-complex-form',
@@ -26,7 +28,8 @@ import { map, Observable, startWith, tap } from 'rxjs';
     MatCheckboxModule,
     MatIconModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatProgressSpinner
 
   ],
   templateUrl: './complex-form.component.html',
@@ -34,6 +37,7 @@ import { map, Observable, startWith, tap } from 'rxjs';
 })
 export class ComplexFormComponent implements OnInit {
 
+  loading = false;
   mainForm!: FormGroup;
   personalInfoForm!: FormGroup;
   contactPreferenceCtrl!: FormControl;
@@ -49,7 +53,10 @@ export class ComplexFormComponent implements OnInit {
   showPhoneCtrl$!: Observable<boolean>;
 
 
-  constructor(private formBuilder: FormBuilder) { }
+
+  constructor(private formBuilder: FormBuilder,
+    private complexFormService: ComplexFormService
+  ) { }
 
   ngOnInit(): void {
     this.initFormControls();
@@ -134,7 +141,24 @@ export class ComplexFormComponent implements OnInit {
   }
 
 
-  onSubmitForm() { }
+  onSubmitForm() {
+    this.loading = true;
+    this.complexFormService.saveUserInfo(this.mainForm.value).pipe(
+      tap(saved => {
+        this.loading = false;
+        if (saved) {
+          this.resetForm();
+        } else {
+          console.error('Echec de l\'enregistrement');
+        }
+      })
+    ).subscribe();
+  }
+
+  private resetForm() {
+    this.mainForm.reset();
+    this.contactPreferenceCtrl.patchValue('email');
+  }
 
   getFormControlErrorText(ctrl: AbstractControl) {
     if (ctrl.hasError('required')) {
