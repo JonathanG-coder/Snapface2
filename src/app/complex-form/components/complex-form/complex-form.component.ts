@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-complex-form',
@@ -44,14 +45,17 @@ export class ComplexFormComponent implements OnInit {
   confirmPasswordCtrl!: FormControl;
   loginInfoForm!: FormGroup;
 
+  showEmailCtrl$!: Observable<boolean>;
+  showPhoneCtrl$!: Observable<boolean>;
+
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.initFormControls();
     this.initMainForm();
+    this.initFormObservables();
   }
-
 
   private initMainForm(): void {
     this.mainForm = this.formBuilder.group({
@@ -83,6 +87,18 @@ export class ComplexFormComponent implements OnInit {
       password: this.passwordCtrl,
       confirmPassword: this.confirmPasswordCtrl
     });
+  }
+
+  private initFormObservables() {
+    this.showEmailCtrl$ = this.contactPreferenceCtrl.valueChanges.pipe(
+      startWith(this.contactPreferenceCtrl.value),
+      map((preference: string) => preference === 'email'),
+
+    );
+    this.showPhoneCtrl$ = this.contactPreferenceCtrl.valueChanges.pipe(
+      startWith(this.contactPreferenceCtrl.value),
+      map((preference: string) => preference === 'phone')
+    );
   }
 
 
