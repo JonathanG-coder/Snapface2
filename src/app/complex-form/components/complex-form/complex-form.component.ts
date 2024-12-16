@@ -10,7 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { map, Observable, startWith } from 'rxjs';
+import { map, Observable, startWith, tap } from 'rxjs';
 
 @Component({
   selector: 'app-complex-form',
@@ -92,13 +92,45 @@ export class ComplexFormComponent implements OnInit {
   private initFormObservables() {
     this.showEmailCtrl$ = this.contactPreferenceCtrl.valueChanges.pipe(
       startWith(this.contactPreferenceCtrl.value),
-      map((preference: string) => preference === 'email'),
-
+      map(preference => preference === 'email'),
+      tap(showEmailCtrl => this.setEmailValidators(showEmailCtrl))
     );
     this.showPhoneCtrl$ = this.contactPreferenceCtrl.valueChanges.pipe(
       startWith(this.contactPreferenceCtrl.value),
-      map((preference: string) => preference === 'phone')
+      map(preference => preference === 'phone'),
+      tap(showPhoneCtrl => this.setPhoneValidators(showPhoneCtrl))
     );
+  }
+
+  private setEmailValidators(showEmailCtrl: boolean) {
+    if (showEmailCtrl) {
+      this.emailCtrl.addValidators([
+        Validators.required,
+        Validators.email
+      ]);
+      this.confirmEmailCtrl.addValidators([     //Ajout de validator, ici q'uil s'agit d'une adresse E-mail
+        Validators.required,
+        Validators.email
+      ]);
+    } else {
+      this.emailCtrl.clearValidators();       // Suppression de validator 
+      this.confirmEmailCtrl.clearValidators();
+    }
+    this.emailCtrl.updateValueAndValidity();     // Important, permet une MAJ aprés la validation d'un contrôle
+    this.confirmEmailCtrl.updateValueAndValidity();
+  }
+
+  private setPhoneValidators(showPhoneCtrl: boolean) {
+    if (showPhoneCtrl) {
+      this.phoneCtrl.addValidators([      //Ajout de validator , ici mn et max 10 pourle numéro de téléphone
+        Validators.required,      
+        Validators.minLength(10), 
+        Validators.maxLength(10)
+      ]);
+    } else {
+      this.phoneCtrl.clearValidators();  // Suppression de validator 
+    }
+    this.phoneCtrl.updateValueAndValidity();  // Important, permet une MAJ aprés la validation d'un contrôle
   }
 
 
