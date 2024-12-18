@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,6 +34,8 @@ import { ComplexFormService } from '../../services/complex-form.service';
   ],
   templateUrl: './complex-form.component.html',
   styleUrls: ['./complex-form.component.scss']
+
+
 })
 export class ComplexFormComponent implements OnInit {
 
@@ -115,7 +117,7 @@ export class ComplexFormComponent implements OnInit {
         Validators.required,
         Validators.email
       ]);
-      this.confirmEmailCtrl.addValidators([     //Ajout de validator, ici q'uil s'agit d'une adresse E-mail
+      this.confirmEmailCtrl.addValidators([     //Ajout de validator, ici il s'agit d'une adresse E-mail
         Validators.required,
         Validators.email
       ]);
