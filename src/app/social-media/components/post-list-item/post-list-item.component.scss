@@ -3,16 +3,50 @@ mat-card {
     background-color: white;
 }
 
-mat-card-title span {
-    color: black;
+mat-card-title {
+    margin-bottom: 12px;
+
+    span {
+        color: rgb(2, 104, 187);
+    }
 }
 
-mat-card-subtitle span {
-    color: gray; 
+mat-card-subtitle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+
+    span {
+        color: rgb(0, 0, 0);
+        display: block;
+    }
 }
 
-
-.post-content {
+mat-card-content {
     margin-top: 10px;
     background-color: white;
+    margin-bottom: 16px;
+    .content-container {
+        display: flex;
+        flex-wrap: wrap; 
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    img {
+        display: block;
+        max-width: 100%; 
+        height: auto;
+    }
+
+    .post-content {
+        white-space: normal; 
+        text-align: justify; 
+        margin-top: 10px; 
+    }
+}
+
+mat-card-actions {
+    margin-top: 10px; 
 }
