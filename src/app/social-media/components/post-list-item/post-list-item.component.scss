@@ -1,6 +1,18 @@
+.mdc-card__actions {
+    display: initial !important;
+    flex-direction: initial !important;
+    align-items: initial !important;
+    box-sizing: initial !important;
+    min-height: initial !important;
+    padding: initial !important;
+}
+
+
 mat-card {
     margin-bottom: 20px;
     background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Amélioration visuelle */
+    border-radius: 8px; /* Coins arrondis */
 }
 
 mat-card-title {
@@ -8,6 +20,7 @@ mat-card-title {
 
     span {
         color: rgb(2, 104, 187);
+        font-size: 18px; /* Taille ajustée pour un bon contraste */
     }
 }
 
@@ -20,6 +33,7 @@ mat-card-subtitle {
     span {
         color: rgb(0, 0, 0);
         display: block;
+        font-size: 14px; /* Taille adaptée */
     }
 }
 
@@ -27,26 +41,60 @@ mat-card-content {
     margin-top: 10px;
     background-color: white;
     margin-bottom: 16px;
+
     .content-container {
         display: flex;
-        flex-wrap: wrap; 
+        flex-wrap: wrap;
         align-items: flex-start;
         gap: 10px;
     }
 
     img {
         display: block;
-        max-width: 100%; 
+        max-width: 100%;
         height: auto;
+        border-radius: 6px; /* Coins arrondis pour une meilleure intégration */
     }
 
     .post-content {
-        white-space: normal; 
-        text-align: justify; 
-        margin-top: 10px; 
+        white-space: normal;
+        text-align: justify;
+        margin-top: 10px;
+        font-size: 16px; /* Taille standard */
     }
 }
 
 mat-card-actions {
-    margin-top: 10px; 
+    margin-top: 10px;
+
+    /* Responsivité pour les petits écrans */
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Espacement entre les actions */
+    }
+}
+
+/* Responsivité globale pour les posts */
+@media (max-width: 768px) {
+    mat-card {
+        padding: 10px;
+    }
+
+    mat-card-title span {
+        font-size: 16px; /* Réduction de la taille de la police */
+    }
+
+    mat-card-subtitle span {
+        font-size: 12px; /* Police plus petite pour les sous-titres */
+    }
+
+    .content-container {
+        flex-direction: column; /* Affiche le contenu en colonne */
+        align-items: center;
+    }
+
+    .post-content {
+        font-size: 14px;
+    }
 }

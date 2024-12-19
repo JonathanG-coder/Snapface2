@@ -17,7 +17,6 @@
         (mouseenter)="onListItemMouseEnter(i)" 
         (mouseleave)="onListItemMouseLeave(i)">
         <span class="comment-text" mat-line>{{ comment.comment }}</span>
-
         <br>
         <span class="comment-date" mat-line>{{ comment.createdDate | timeAgo }}</span>
     </mat-list-item>

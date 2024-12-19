@@ -1,11 +1,14 @@
-/* S'assure que chaque élément de commentaire a une bordure et une couleur appropriée */
+/* Ajustement pour les commentaires */
 mat-list-item {
-    border-bottom: thin solid #555;
+    border-bottom: thin solid #ccc;
     color: black;
     display: flex;
     flex-direction: column;
-    width: 100%; /* Les éléments occupent toute la largeur disponible */
+    width: 100%; /* Les éléments occupent toute la largeur */
     padding: 10px 0; /* Espacement interne */
+    background: #f9f9f9; /* Fond léger pour séparer les commentaires */
+    border-radius: 4px; /* Coins arrondis */
+    margin-bottom: 10px; /* Espacement entre les éléments */
 }
 
 mat-list-item span {
@@ -14,23 +17,25 @@ mat-list-item span {
 
 h2[matSubheader] {
     color: gray;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 /* Conteneur principal pour la section de commentaires */
 .comments-row {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Aligner à gauche le contenu */
+    justify-content: flex-start; /* Alignement à gauche */
     width: 100%;
     gap: 10px; /* Espacement entre le champ de saisie et le bouton */
-    flex-wrap: nowrap; /* Empêche les éléments de passer à la ligne */
-    margin-bottom: 15px; /* Espacement entre le champ de saisie et les commentaires */
+    flex-wrap: nowrap;
+    margin-bottom: 15px;
 }
 
 /* Champ de saisie */
 mat-form-field {
-    flex-grow: 1; /* Prend toute la largeur disponible */
-    min-width: 200px; /* Largeur minimale pour éviter qu'il soit trop petit */
+    flex-grow: 1;
+    min-width: 200px;
 }
 
 /* Bouton avec l'icône "Envoyer" */
@@ -47,49 +52,45 @@ button[mat-icon-button] {
     align-items: center;
     height: 40px;
     width: 40px;
-    margin-left: 10px; /* Un petit espace entre le champ et le bouton */
+    margin-left: 10px;
 }
 
-/* Responsivité - quand l'écran est inférieur à 768px (tablettes et mobiles) */
+/* Responsivité */
 @media screen and (max-width: 768px) {
     .comments-row {
-        flex-direction: column; /* Mettre les éléments en colonne */
+        flex-direction: column; /* Affichage en colonne */
         align-items: stretch; /* Les éléments s'étendent sur toute la largeur */
-        gap: 10px; /* Espacement plus grand entre les éléments */
+        gap: 10px;
     }
 
     mat-form-field {
-        width: 100%; /* Le champ prend toute la largeur disponible */
+        width: 100%;
     }
 
     button[mat-icon-button] {
-        width: 40px; /* Taille fixe pour le bouton */
-        height: 40px; /* Taille fixe pour le bouton */
-        margin-left: 0; /* Pas de marge à gauche */
+        margin-left: 0;
     }
 }
 
-/* Ajustement pour les très petits écrans - jusqu'à 480px */
 @media screen and (max-width: 480px) {
     mat-form-field {
-        font-size: 14px; /* Réduire la taille du texte dans le champ */
+        font-size: 14px;
     }
 
     mat-icon {
-        font-size: 20px; /* Réduire la taille de l'icône */
+        font-size: 20px;
     }
 
     button[mat-icon-button] {
         height: 35px;
-        width: 35px; /* Réduire la taille du bouton */
+        width: 35px;
     }
 }
 
-/* Pour la liste des commentaires */
 .comment-text {
-    font-size: 16px; /* Taille du texte des commentaires */
-    word-wrap: break-word; /* Le texte ne déborde pas */
-    margin-bottom: 5px; /* Espacement entre le texte et la date */
+    font-size: 16px;
+    word-wrap: break-word;
+    margin-bottom: 5px;
 }
 
 .comment-date {
@@ -97,13 +98,12 @@ button[mat-icon-button] {
     color: gray;
 }
 
-/* Responsivité pour la liste des commentaires */
 @media screen and (max-width: 768px) {
     .comment-text {
-        font-size: 14px; /* Réduire la taille de la police sur les petits écrans */
+        font-size: 14px;
     }
 
     .comment-date {
-        font-size: 12px; /* Réduire la taille de la date */
+        font-size: 12px;
     }
 }
