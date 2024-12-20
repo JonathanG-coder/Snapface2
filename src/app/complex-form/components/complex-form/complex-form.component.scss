@@ -18,6 +18,14 @@ mat-form-field {
     }
 }
 
+mat-card-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+
+
 .form-row {
     display: flex;
     justify-content: space-between;
@@ -36,7 +44,7 @@ mat-form-field {
     color: black;
 }
 
-.mat-radio-button ~ .mat-radio-button {
+.mat-radio-button~.mat-radio-button {
     margin-left: 16px;
 
     @media (max-width: 768px) {
@@ -83,6 +91,15 @@ mat-card {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+mat-card-subtitle {
+    margin-left: 10px;
+}
+
+mat-form-field {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 @media (max-width: 768px) {
     mat-form-field {
         width: 100%;
@@ -119,7 +136,7 @@ mat-card {
         flex-direction: column;
     }
 
-    .mat-radio-button ~ .mat-radio-button {
+    .mat-radio-button~.mat-radio-button {
         margin-left: 0;
         margin-top: 10px;
     }
